@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das cartas
-// Objetivo: No nível novato você deve criar as cartas representando as cidades utilizando scanf para entrada de dados e printf para exibir as informações.
-
 int main() {
-  int card, populationNumber, numberOfTouristAttractions;
+  int card,  numberOfTouristAttractions;
   char state;
   char cardCode[5];
   char city[60];
-  float areaInKm, pib, populationDensity, pibPerCapita;
+  double pib;
+  unsigned long int populationNumber;
+  float areaInKm, populationDensity, pibPerCapita;
 
-  int card2, populationNumber2, numberOfTouristAttractions2;
+  int card2, numberOfTouristAttractions2;
   char state2;
   char cardCode2[5];
   char city2[60];
-  float areaInKm2, pib2, populationDensity2, pibPerCapita2;
+  double pib2;
+  unsigned long int populationNumber2;
+  float areaInKm2, populationDensity2, pibPerCapita2;
 
   printf("--- Crie as cartas para o Super Trunfo ---\n");
 
@@ -36,13 +36,13 @@ int main() {
   city[strcspn(city, "\n")] = '\0';
 
   printf("Número de habitantes: \n");
-  scanf("%d", &populationNumber);
+  scanf("%lu", &populationNumber);
 
   printf("Área da cidade em km²: \n");
   scanf("%f", &areaInKm);
 
   printf("Qual o PIB: \n");
-  scanf("%f", &pib);
+  scanf("%lf", &pib);
 
   printf("Quantidade de pontos turísticos na cidade: \n");
   scanf("%d", &numberOfTouristAttractions);
@@ -70,13 +70,13 @@ int main() {
   city2[strcspn(city2, "\n")] = '\0';
 
   printf("Número de habitantes: \n");
-  scanf("%d", &populationNumber2);
+  scanf("%lu", &populationNumber2);
 
   printf("Área da cidade em km²: \n");
   scanf("%f", &areaInKm2);
 
   printf("Qual o PIB: \n");
-  scanf("%f", &pib2);
+  scanf("%lf", &pib2);
 
   printf("Quantidade de pontos turísticos na cidade: \n");
   scanf("%d", &numberOfTouristAttractions2);
@@ -92,7 +92,7 @@ int main() {
   printf("Estado: %c\n", state);
   printf("Código da Carta: %s\n", cardCode);
   printf("Cidade: %s\n", city);
-  printf("Número de habitantes: %d\n", populationNumber);
+  printf("Número de habitantes: %lu\n", populationNumber);
   printf("Área em Km²: %.2f km²\n", areaInKm);
   printf("PIB: %.2f\n", pib);
   printf("Pontos Turísticos: %d\n", numberOfTouristAttractions);
@@ -105,13 +105,35 @@ int main() {
   printf("Estado: %c\n", state2);
   printf("Código da Carta: %s\n", cardCode2);
   printf("Cidade: %s\n", city2);
-  printf("Número de habitantes: %d\n", populationNumber2);
+  printf("Número de habitantes: %lu\n", populationNumber2);
   printf("Área em Km²: %.2f km²\n", areaInKm2);
   printf("PIB: R$ %.2f\n", pib2); 
   printf("Pontos Turísticos: %d\n", numberOfTouristAttractions2);
   printf("Densidade Populacional: %.2f hab/km²\n", populationDensity2);
   printf("PIB per Capita: R$%.2f\n", pibPerCapita2);
-  
+
+  printf("===========================================\n");
+
+  double superPower = (double)populationNumber + areaInKm + pib + numberOfTouristAttractions + pibPerCapita + (1.0 / populationDensity);
+  double superPower2 = (double)populationNumber2 + areaInKm2 + pib2 + numberOfTouristAttractions2 + pibPerCapita2 + (1.0 / populationDensity2);
+
+  char *winner[] = {"Carta 2", "Carta 1"};
+  short int resultPopulation = populationNumber > populationNumber2;
+  short int resultAreaInKm = areaInKm > areaInKm2;
+  short int resultAttractions =  numberOfTouristAttractions > numberOfTouristAttractions2;
+  short int resultDensity = populationDensity < populationDensity2;
+  short int resultPibPerCapita = pibPerCapita > pibPerCapita2;
+
+  printf("--- Duelo das cartas ---\n");
+  printf("População: %s venceu!\n", winner[resultPopulation]);
+  printf("Área em Km²: %s venceu!\n", winner[resultAreaInKm]);
+  printf("PIB: %s venceu!\n", winner[pib > pib2]); 
+  printf("Pontos Turísticos: %s venceu!\n", winner[resultAttractions]);
+  printf("Densidade Populacional: %s venceu!\n", winner[resultDensity]);
+  printf("PIB per Capita: %s venceu!\n", winner[resultPibPerCapita]);
+  printf("Super Poder: %s venceu!\n", winner[superPower > superPower2]);
+
+
 
 return 0;
 } 
